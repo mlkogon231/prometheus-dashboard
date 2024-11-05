@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Monitoring Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <header class="mb-8">
+            <h1 class="text-3xl font-bold text-gray-800">Application Monitoring</h1>
+            <p class="text-gray-600">Last updated: <span id="lastUpdated"></span></p>
+        </header>
+
+        <!-- Alert Banner -->
+        <div id="alertBanner" class="hidden mb-6 bg-red-100 border-l-4 border-red-500 p-4">
+            <div class="flex">
+                <div class="flex-shrink-0">
+                    <svg class="h-5 w-5 text-red-500" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+                    </svg>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm text-red-700" id="alertMessage">
+                        Alert message will appear here
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <!-- Application Health -->
+            <div class="bg-white rounded-lg shadow p-6">
+                <h2 class="text-xl font-semibold mb-4">Application Health</h2>
+                <div class="h-64 bg-gray-50 rounded border border-gray-200 p-4">
+                    <!-- Grafana Embed Code for Application Health -->
+                    <div class="text-center text-gray-500">
+                        [Grafana Panel: Application Uptime, Response Times, Error Rates]
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resource Usage -->
+            <div class="bg-white rounded-lg shadow p-6">
+                <h2 class="text-xl font-semibold mb-4">Resource Usage</h2>
+                <div class="h-64 bg-gray-50 rounded border border-gray-200 p-4">
+                    <!-- Grafana Embed Code for Resource Usage -->
+                    <div class="text-center text-gray-500">
+                        [Grafana Panel: CPU, Memory, Disk Usage]
+                    </div>
+                </div>
+            </div>
+
+            <!-- Endpoint Performance -->
+            <div class="bg-white rounded-lg shadow p-6">
+                <h2 class="text-xl font-semibold mb-4">Endpoint Performance</h2>
+                <div class="h-64 bg-gray-50 rounded border border-gray-200 p-4">
+                    <!-- Grafana Embed Code for Endpoint Metrics -->
+                    <div class="text-center text-gray-500">
+                        [Grafana Panel: Endpoint Response Times, Success Rates]
+                    </div>
+                </div>
+            </div>
+
+            <!-- Custom Metrics -->
+            <div class="bg-white rounded-lg shadow p-6">
+                <h2 class="text-xl font-semibold mb-4">Custom Metrics</h2>
+                <div class="h-64 bg-gray-50 rounded border border-gray-200 p-4">
+                    <!-- Grafana Embed Code for Custom Metrics -->
+                    <div class="text-center text-gray-500">
+                        [Grafana Panel: Custom Application Metrics]
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="bg-white rounded-lg shadow p-4">
+                <h3 class="text-sm font-medium text-gray-500">Total Requests</h3>
+                <p class="text-2xl font-semibold" id="totalRequests">-</p>
+            </div>
+            <div class="bg-white rounded-lg shadow p-4">
+                <h3 class="text-sm font-medium text-gray-500">Error Rate</h3>
+                <p class="text-2xl font-semibold" id="errorRate">-</p>
+            </div>
+            <div class="bg-white rounded-lg shadow p-4">
+                <h3 class="text-sm font-medium text-gray-500">Avg Response Time</h3>
+                <p class="text-2xl font-semibold" id="avgResponse">-</p>
+            </div>
+            <div class="bg-white rounded-lg shadow p-4">
+                <h3 class="text-sm font-medium text-gray-500">Active Users</h3>
+                <p class="text-2xl font-semibold" id="activeUsers">-</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Update last updated timestamp
+        function updateTimestamp() {
+            const now = new Date();
+            document.getElementById('lastUpdated').textContent = now.toLocaleString();
+        }
+        setInterval(updateTimestamp, 60000);
+        updateTimestamp();
+
+        // Simulated alert system - you would replace this with real monitoring
+        function checkAlerts() {
+            const alertBanner = document.getElementById('alertBanner');
+            const alertMessage = document.getElementById('alertMessage');
+            
+            // Example condition - replace with real metrics
+            const hasAlert = Math.random() > 0.8;
+            
+            if (hasAlert) {
+                alertMessage.textContent = "High latency detected in API endpoints";
+                alertBanner.classList.remove('hidden');
+            } else {
+                alertBanner.classList.add('hidden');
+            }
+        }
+        setInterval(checkAlerts, 5000);
+    </script>
+</body>
+</html>
